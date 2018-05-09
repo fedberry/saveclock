@@ -4,9 +4,10 @@
 Name:       saveclock
 Summary:    Restore/save system clock from/to a file
 Version:    0.1
-Release:    1.%{commit_short}%{?dist}
+Release:    2.%{commit_short}%{?dist}
 URL:        https://github.com/monnerat/saveclock
 Source:     %{url}/archive/%{commit}.tar.gz#/%{name}-%{version}-%{commit_short}.tar.gz
+Patch0:     0001-systemd-service.patch
 License:    MIT
 Group:      System Environment/Daemons
 BuildRequires:      systemd-units
@@ -28,7 +29,7 @@ command line.
 
 
 %prep
-%setup -n %{name}-%{commit}
+%autosetup -p1 -n %{name}-%{commit}
 
 
 %build
@@ -86,5 +87,8 @@ fi
 
 
 %changelog
+* Wed May 09 2018 Vaughan <devel at agrez dot net> 0.1-2.40031c0
+- Start the service earlier in the boot process (Patch0)
+
 * Sat Dec 02 2017 Vaughan <devel at agrez dot net> 0.1-1.40031c0
 - Initial package: git commit 40031c0f437b70ad5e46f93fce2622b28dbe14e2
